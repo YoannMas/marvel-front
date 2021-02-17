@@ -1,0 +1,21 @@
+//  VARIABLES
+
+$marvelColor: #f0151e;
+$marvelColorHovered: #d8151b;
+
+// IMPORTS
+
+@import "scss/header.scss";
+
+// GLOBAL RULES
+
+.App {
+  background-color: rgb(233, 232, 232);
+  height: 100vh;
+  font-family: "Montserrat", Arial, Helvetica, sans-serif;
+}
+
+.container {
+  width: 1200px;
+  margin: 0 auto;
+}
