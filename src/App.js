@@ -12,7 +12,7 @@ function App() {
       <Router>
         <Header />
         <Switch>
-          <Route path="/comics">
+          <Route path={["/comics", "/comics/:id"]}>
             <Comics server={server} />
           </Route>
           <Route path="/">

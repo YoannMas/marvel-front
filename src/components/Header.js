@@ -6,12 +6,14 @@ const Header = () => {
     <div className="header">
       <div className="container">
         <div>
-          <img src={logo} alt="Marvel's logo" />
-          <Link to="/">Personnages</Link>
+          <Link to="/">
+            <img src={logo} alt="Marvel's logo" />
+          </Link>
+          <Link to="/">Characters</Link>
           <Link to="/comics">Comics</Link>
-          <Link>Favoris</Link>
+          <Link>Favorites</Link>
         </div>
-        <button>Se connecter</button>
+        <button>Login</button>
       </div>
     </div>
   );

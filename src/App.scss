@@ -2,9 +2,12 @@
 
 $marvelColor: #f0151e;
 $marvelColorHovered: #d8151b;
-$myGrey: rgb(49, 49, 49);
 
 // IMPORTS
+@font-face {
+  font-family: "Benton";
+  src: url(./scss/fonts/Benton.otf);
+}
 
 @import "scss/header.scss";
 @import "scss/cards.scss";
@@ -12,11 +15,13 @@ $myGrey: rgb(49, 49, 49);
 // GLOBAL RULES
 
 .App {
-  background-color: rgb(233, 232, 232);
+  background-color: #000;
   font-family: "Montserrat", Arial, Helvetica, sans-serif;
+  box-sizing: border-box;
 }
 
 .container {
-  width: 1200px;
+  width: 1240px;
   margin: 0 auto;
+  box-sizing: border-box;
 }

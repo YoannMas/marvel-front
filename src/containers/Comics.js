@@ -1,16 +1,26 @@
 import { useState, useEffect } from "react";
+import { useParams } from "react-router-dom";
 import Card from "../components/Card";
 import axios from "axios";
 
 const Comics = ({ server }) => {
   const [isLoading, setIsLoading] = useState(true);
   const [data, setData] = useState();
+  const { id } = useParams();
+  console.log(id);
 
   const fetchData = async () => {
-    const response = await axios.get(`${server}/comics`);
-    console.log(response.data);
-    setData(response.data);
-    setIsLoading(false);
+    if (id) {
+      const response = await axios.get(`${server}/comics/${id}`);
+      console.log(response.data);
+      setData(response.data);
+      setIsLoading(false);
+    } else {
+      const response = await axios.get(`${server}/comics`);
+      console.log(response.data);
+      setData(response.data);
+      setIsLoading(false);
+    }
   };
 
   useEffect(() => {
@@ -26,7 +36,7 @@ const Comics = ({ server }) => {
       ) : (
         <div className="wrapper">
           {data.results.map((el) => {
-            return <Card el={el} />;
+            return <Card el={el} key={el._id} />;
           })}
         </div>
       )}

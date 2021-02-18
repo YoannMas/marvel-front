@@ -26,7 +26,7 @@ const Characters = ({ server }) => {
       ) : (
         <div className="wrapper">
           {data.results.map((el) => {
-            return <Card el={el} />;
+            return <Card el={el} key={el._id} />;
           })}
         </div>
       )}

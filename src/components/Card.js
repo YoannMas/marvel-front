@@ -1,19 +1,28 @@
-import { useLocation } from "react-router-dom";
-
+import { useLocation, Link } from "react-router-dom";
+import { useState } from "react";
 const Card = ({ el }) => {
+  const [display, setDisplay] = useState(false);
   let location = useLocation();
   const notFound = "image_not_available";
   return (
-    <div className="card">
-      {el.thumbnail.path.match(notFound) ? (
-        <div className="no-picture">Aucune image trouvée 😢</div>
-      ) : (
-        <img src={`${el.thumbnail.path}.${el.thumbnail.extension}`} alt="" />
+    <div
+      className="card"
+      onClick={() => {
+        setDisplay((display) => !display);
+      }}
+    >
+      <img
+        style={{ objectPosition: el.thumbnail.path.match(notFound) ? "left" : "center" }}
+        src={`${el.thumbnail.path}.${el.thumbnail.extension}`}
+        alt=""
+      />
+      <div>{location.pathname === "/" ? <span>{el.name}</span> : location.pathname === "/comics" ? <span>{el.title}</span> : ""}</div>
+      {display && (
+        <div className="verso hidden">
+          <span>{el.description ? el.description : "No description available for this character"}</span>
+          <Link to={`/comics/${el._id}`}>See his comics</Link>
+        </div>
       )}
-      <div>
-        {location.pathname === "/" ? <span>{el.name}</span> : location.pathname === "/comics" ? <span>{el.title}</span> : ""}
-        <span>{el.description}</span>
-      </div>
     </div>
   );
 };
