@@ -2,6 +2,7 @@
 
 $marvelColor: #f0151e;
 $marvelColorHovered: #d8151b;
+$grey: rgba(255, 255, 255, 0.336);
 
 // IMPORTS
 @font-face {
@@ -11,6 +12,7 @@ $marvelColorHovered: #d8151b;
 
 @import "scss/header.scss";
 @import "scss/cards.scss";
+@import "scss/modal.scss";
 
 // GLOBAL RULES
 

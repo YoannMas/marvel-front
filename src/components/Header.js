@@ -1,9 +1,13 @@
 import logo from "../assets/logo.svg";
 import { Link } from "react-router-dom";
+import Login from "../components/Login";
 
-const Header = () => {
+const Header = ({ loginModal, setLoginModal, signupModal, setSignupModal, server, setUser }) => {
   return (
     <div className="header">
+      {loginModal && (
+        <Login setLoginModal={setLoginModal} signupModal={signupModal} setSignupModal={setSignupModal} server={server} setUser={setUser} />
+      )}
       <div className="container">
         <div>
           <Link to="/">
@@ -13,7 +17,13 @@ const Header = () => {
           <Link to="/comics">Comics</Link>
           <Link>Favorites</Link>
         </div>
-        <button>Login</button>
+        <button
+          onClick={() => {
+            setLoginModal(true);
+          }}
+        >
+          Login
+        </button>
       </div>
     </div>
   );

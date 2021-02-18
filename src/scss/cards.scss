@@ -21,14 +21,14 @@
     height: 35px;
     width: 300px;
     background-color: #000;
-    border: 1px solid rgba(255, 255, 255, 0.336);
+    border: 1px solid $grey;
     border-radius: 8px;
     padding: 10px;
     outline: none;
     color: #fff;
     &::placeholder {
       font-family: inherit;
-      color: rgba(255, 255, 255, 0.336);
+      color: $grey;
     }
     &:focus {
       border-color: #fff;
@@ -44,13 +44,13 @@
   font-size: 14px;
   margin-top: 15px;
   span {
-    color: rgba(255, 255, 255, 0.336);
+    color: $grey;
     margin-right: 8px;
   }
   select {
     background-color: #000;
-    border: 1px solid rgba(255, 255, 255, 0.336);
-    color: rgba(255, 255, 255, 0.336);
+    border: 1px solid $grey;
+    color: $grey;
     border-radius: 5px;
     padding: 2px;
     outline: none;
@@ -85,7 +85,7 @@
     }
   }
   .verso {
-    background-color: #b3b3b3cb;
+    background-color: $grey;
     position: absolute;
     top: 0;
     right: 0;
