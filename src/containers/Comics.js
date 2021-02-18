@@ -1,5 +1,4 @@
 import { useState, useEffect } from "react";
-import { useLocation } from "react-router-dom";
 import Card from "../components/Card";
 import axios from "axios";
 
@@ -31,7 +30,6 @@ const Comics = ({ server }) => {
           })}
         </div>
       )}
-      }
     </div>
   );
 };
