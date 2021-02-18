@@ -36,6 +36,27 @@
   }
 }
 
+.limit {
+  display: flex;
+  justify-content: flex-start;
+  align-items: center;
+  width: 100%;
+  font-size: 14px;
+  margin-top: 15px;
+  span {
+    color: rgba(255, 255, 255, 0.336);
+    margin-right: 8px;
+  }
+  select {
+    background-color: #000;
+    border: 1px solid rgba(255, 255, 255, 0.336);
+    color: rgba(255, 255, 255, 0.336);
+    border-radius: 5px;
+    padding: 2px;
+    outline: none;
+  }
+}
+
 .card {
   height: 380px;
   width: 300px;
