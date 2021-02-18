@@ -125,3 +125,33 @@
     }
   }
 }
+
+.pagination {
+  display: flex;
+  justify-content: center;
+  margin-bottom: 30px;
+  button {
+    box-sizing: border-box;
+    background-color: #000;
+    border: none;
+    font-size: 14px;
+    color: $marvelColor;
+    outline: none;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    cursor: pointer;
+    &:nth-child(1) {
+      margin-right: 50px;
+    }
+    &:hover {
+      color: $marvelColorHovered;
+    }
+  }
+  .first-hidden {
+    width: 158.33px;
+  }
+  .second-hidden {
+    width: 91.2px;
+  }
+}

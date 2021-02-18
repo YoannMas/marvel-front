@@ -4,6 +4,7 @@ import { useState } from "react";
 const Card = ({ el }) => {
   // state for description
   const [display, setDisplay] = useState(false);
+  const [target, setTarget] = useState("");
   let location = useLocation();
   const notFound = "image_not_available";
 
