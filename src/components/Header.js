@@ -7,8 +7,8 @@ const Header = () => {
       <div className="container">
         <div>
           <img src={logo} alt="Marvel's logo" />
-          <Link to="/characters">Personnages</Link>
-          <Link>Comics</Link>
+          <Link to="/">Personnages</Link>
+          <Link to="/comics">Comics</Link>
           <Link>Favoris</Link>
         </div>
         <button>Se connecter</button>

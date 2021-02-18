@@ -2,16 +2,17 @@
 
 $marvelColor: #f0151e;
 $marvelColorHovered: #d8151b;
+$myGrey: rgb(49, 49, 49);
 
 // IMPORTS
 
 @import "scss/header.scss";
+@import "scss/cards.scss";
 
 // GLOBAL RULES
 
 .App {
   background-color: rgb(233, 232, 232);
-  height: 100vh;
   font-family: "Montserrat", Arial, Helvetica, sans-serif;
 }
 

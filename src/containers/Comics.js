@@ -1,17 +1,18 @@
 import { useState, useEffect } from "react";
+import { useLocation } from "react-router-dom";
 import Card from "../components/Card";
-const axios = require("axios");
+import axios from "axios";
 
-const Characters = ({ server }) => {
+const Comics = ({ server }) => {
   const [isLoading, setIsLoading] = useState(true);
   const [data, setData] = useState();
 
   const fetchData = async () => {
-    const response = await axios.get(`${server}/characters`);
+    const response = await axios.get(`${server}/comics`);
+    console.log(response.data);
     setData(response.data);
     setIsLoading(false);
   };
-  console.log(data);
 
   useEffect(() => {
     fetchData();
@@ -30,8 +31,9 @@ const Characters = ({ server }) => {
           })}
         </div>
       )}
+      }
     </div>
   );
 };
 
-export default Characters;
+export default Comics;
