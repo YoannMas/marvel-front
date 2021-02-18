@@ -4,12 +4,13 @@ import Card from "../components/Card";
 import axios from "axios";
 
 const Comics = ({ server }) => {
-  const [isLoading, setIsLoading] = useState(true);
   const [data, setData] = useState();
   const [selector, setSelector] = useState("");
   const [title, setTitle] = useState("");
+  const [isLoading, setIsLoading] = useState(true);
+  const [onChange, setOnChange] = useState(false);
   const { id } = useParams();
-  console.log(data);
+  console.log(isLoading);
 
   const handlePageChange = () => {
     window.scrollTo(0, 0);
@@ -17,6 +18,10 @@ const Comics = ({ server }) => {
 
   const fetchData = async () => {
     try {
+      // fix a bug with component goes from /comics/:id to /comics
+      if (!onChange) {
+        setIsLoading(true);
+      }
       if (id) {
         const response = await axios.get(`${server}/comics/${id}`);
         setData(response.data);
@@ -55,6 +60,7 @@ const Comics = ({ server }) => {
                 placeholder="search your comics..."
                 onChange={(event) => {
                   setTitle(event.target.value);
+                  setOnChange(true);
                 }}
               />
             )}

@@ -12,7 +12,6 @@ const Characters = ({ server }) => {
     setData(response.data);
     setIsLoading(false);
   };
-  console.log(data);
 
   useEffect(() => {
     fetchData();
