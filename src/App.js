@@ -8,7 +8,9 @@ import Cookies from "js-cookie";
 import Favorites from "./containers/Favorites";
 
 // switch on local or prod
-const server = "http://localhost:3001";
+const server = "https://marvel-node.herokuapp.com";
+// https://marvel-node.herokuapp.com
+// http://localhost:3001
 
 function App() {
   const [loginModal, setLoginModal] = useState(false);
