@@ -5,11 +5,10 @@ import { useState } from "react";
 import Cookies from "js-cookie";
 import axios from "axios";
 
-const Card = ({ el, server, setAdded }) => {
+const Card = ({ el, server, setAdded, setLoginModal }) => {
   // state for description
   const [display, setDisplay] = useState(false);
   const [errorMessage, setErrorMessage] = useState("");
-  const [fav, setFav] = useState(false);
   let location = useLocation();
   const notFound = "image_not_available";
 
@@ -61,24 +60,43 @@ const Card = ({ el, server, setAdded }) => {
     <div
       // display -verso- on click
       className="card"
-      onClick={() => {
-        setDisplay((display) => !display);
-      }}
     >
       <img
+        onClick={() => {
+          setDisplay((display) => !display);
+        }}
         style={{ objectPosition: el.thumbnail.path.match(notFound) ? "left" : "top" }}
         src={`${el.thumbnail.path}.${el.thumbnail.extension}`}
         alt=""
       />
-      <div>{location.pathname === "/" ? <span>{el.name}</span> : location.pathname.match("/comics") ? <span>{el.title}</span> : ""}</div>
+      <div>{el.name ? el.name : el.title}</div>
       {display && (
-        <div className="verso hidden">
+        <div
+          className="verso hidden"
+          onClick={() => {
+            setDisplay((display) => !display);
+          }}
+        >
           <span>{el.description ? el.description : "No description available for this character"}</span>
           {location.pathname === "/" && el.comics.length > 0 && <Link to={`/comics/${el._id}`}>See his comics</Link>}
           <span className="error" style={{ color: "#f0151cb7", fontWeight: 600 }}>
             {errorMessage}
           </span>
-          <FontAwesomeIcon className="heart" icon={faHeart} onClick={addToFavorites} />
+          {location.pathname.match("/favorites") ? (
+            ""
+          ) : (
+            <FontAwesomeIcon
+              className="heart"
+              icon={faHeart}
+              onClick={() => {
+                if (Cookies.get("userToken")) {
+                  addToFavorites();
+                } else {
+                  setLoginModal(true);
+                }
+              }}
+            />
+          )}
         </div>
       )}
     </div>

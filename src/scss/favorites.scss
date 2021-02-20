@@ -1,0 +1,32 @@
+.favorites {
+  margin-top: 110px;
+  h2 {
+    color: #fff;
+    font-size: 24px;
+    font-weight: 600;
+  }
+  h3 {
+    color: #fff;
+    font-size: 20px;
+    font-weight: 600;
+    margin-bottom: 20px;
+  }
+}
+
+.favorites-wrapper {
+  margin-top: 40px;
+  display: flex;
+  flex-direction: column;
+}
+
+.overflow {
+  display: flex;
+  overflow: hidden;
+  overflow-x: scroll;
+  div {
+    margin-right: 20px;
+    .verso {
+      left: 0;
+    }
+  }
+}

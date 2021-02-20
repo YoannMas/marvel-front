@@ -5,31 +5,35 @@ import Signup from "../components/Signup";
 import Cookies from "js-cookie";
 import { useEffect } from "react";
 
-const Header = ({ loginModal, setLoginModal, signupModal, setSignupModal, server, setUser, added }) => {
+const Header = ({ loginModal, setLoginModal, signupModal, setSignupModal, server, setUser, added, userToken }) => {
   useEffect(() => {}, [added]);
 
   return (
-    <div className="header">
+    <>
       {loginModal && <Login setLoginModal={setLoginModal} setSignupModal={setSignupModal} server={server} setUser={setUser} />}
       {signupModal && <Signup setLoginModal={setLoginModal} setSignupModal={setSignupModal} server={server} setUser={setUser} />}
-      <div className="container">
-        <div>
-          <Link to="/">
-            <img src={logo} alt="Marvel's logo" />
-          </Link>
-          <Link to="/">Characters</Link>
-          <Link to="/comics">Comics</Link>
-          <Link className={added && "added"}>Favorites</Link>
+      <div className="header">
+        <div className="container">
+          <div>
+            <Link to="/">
+              <img src={logo} alt="Marvel's logo" />
+            </Link>
+            <Link to="/">Characters</Link>
+            <Link to="/comics">Comics</Link>
+            <Link to={`/favorites/${Cookies.get("userToken")}`} className={added ? "added" : undefined}>
+              Favorites
+            </Link>
+          </div>
+          <button
+            onClick={() => {
+              userToken ? setUser(null) : setLoginModal(true);
+            }}
+          >
+            {userToken ? "Logout" : "Login"}
+          </button>
         </div>
-        <button
-          onClick={() => {
-            Cookies.get("userToken") ? setUser(null) : setLoginModal(true);
-          }}
-        >
-          {Cookies.get("userToken") ? "Logout" : "Login"}
-        </button>
       </div>
-    </div>
+    </>
   );
 };
 

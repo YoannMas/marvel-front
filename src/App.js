@@ -5,6 +5,7 @@ import Comics from "./containers/Comics";
 import { BrowserRouter as Router, Switch, Route } from "react-router-dom";
 import { useState } from "react";
 import Cookies from "js-cookie";
+import Favorites from "./containers/Favorites";
 
 // switch on local or prod
 const server = "http://localhost:3001";
@@ -12,14 +13,14 @@ const server = "http://localhost:3001";
 function App() {
   const [loginModal, setLoginModal] = useState(false);
   const [signupModal, setSignupModal] = useState(false);
-  const [userToken, setUserToken] = useState(Cookies.get("userToken") || null);
   const [added, setAdded] = useState(false);
+  const [userToken, setUserToken] = useState(Cookies.get("userToken") || null);
 
   const setUser = (token) => {
     if (token) {
       console.log(token);
       Cookies.set("userToken", token, { expires: 7 });
-      setUserToken(null);
+      setUserToken(token);
     } else {
       Cookies.remove("userToken");
       setUserToken(null);
@@ -37,14 +38,18 @@ function App() {
           server={server}
           setUser={setUser}
           added={added}
+          userToken={userToken}
         />
         <Switch>
           {/* id - conditionnal params */}
           <Route path="/comics/:id?">
-            <Comics server={server} setAdded={setAdded} />
+            <Comics server={server} setAdded={setAdded} setLoginModal={setLoginModal} />
+          </Route>
+          <Route path="/favorites/:token">
+            <Favorites server={server} />
           </Route>
           <Route path="/">
-            <Characters server={server} setAdded={setAdded} />
+            <Characters server={server} setAdded={setAdded} setLoginModal={setLoginModal} />
           </Route>
         </Switch>
       </Router>
