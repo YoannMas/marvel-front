@@ -4,8 +4,10 @@ import Login from "../components/Login";
 import Signup from "../components/Signup";
 import Cookies from "js-cookie";
 import { useEffect } from "react";
+import { useHistory } from "react-router-dom";
 
 const Header = ({ loginModal, setLoginModal, signupModal, setSignupModal, server, setUser, added, userToken }) => {
+  const history = useHistory();
   useEffect(() => {}, [added]);
 
   return (
@@ -20,13 +22,24 @@ const Header = ({ loginModal, setLoginModal, signupModal, setSignupModal, server
             </Link>
             <Link to="/">Characters</Link>
             <Link to="/comics">Comics</Link>
-            <Link to={`/favorites/${Cookies.get("userToken")}`} className={added ? "added" : undefined}>
+            <Link
+              to={`/favorites/${Cookies.get("userToken")}`}
+              className={added ? "added" : undefined}
+              onClick={() => {
+                !userToken && setLoginModal(true);
+              }}
+            >
               Favorites
             </Link>
           </div>
           <button
             onClick={() => {
-              userToken ? setUser(null) : setLoginModal(true);
+              if (userToken) {
+                setUser(null);
+                history.push("/");
+              } else {
+                setLoginModal(true);
+              }
             }}
           >
             {userToken ? "Logout" : "Login"}

@@ -1,12 +1,16 @@
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faTimes } from "@fortawesome/free-solid-svg-icons";
 import { useState } from "react";
+import { useLocation, useHistory } from "react-router-dom";
+import Cookies from "js-cookie";
 import axios from "axios";
 
 const Login = ({ setLoginModal, server, setUser, setSignupModal }) => {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [errorMessage, setErrorMessage] = useState("");
+  const location = useLocation();
+  const history = useHistory();
 
   const handleSubmit = async (event) => {
     try {
@@ -17,6 +21,9 @@ const Login = ({ setLoginModal, server, setUser, setSignupModal }) => {
       });
       setUser(response.data.token);
       setLoginModal(false);
+      if (location.pathname.match("/favorites")) {
+        history.push(`/favorites/${Cookies.get("userToken")}`);
+      }
     } catch (error) {
       setErrorMessage("Email or password invalid");
       console.log(error.message);
@@ -28,7 +35,12 @@ const Login = ({ setLoginModal, server, setUser, setSignupModal }) => {
       <div className="modal-wrapper">
         <div
           onClick={() => {
-            setLoginModal(false);
+            if (location.pathname.match("/favorites")) {
+              history.push("/");
+              setLoginModal(false);
+            } else {
+              setLoginModal(false);
+            }
           }}
         >
           <FontAwesomeIcon icon={faTimes} />

@@ -23,6 +23,9 @@
   display: flex;
   overflow: hidden;
   overflow-x: scroll;
+  &::-webkit-scrollbar {
+    display: none;
+  }
   div {
     margin-right: 20px;
     .verso {

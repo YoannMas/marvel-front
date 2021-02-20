@@ -2,6 +2,7 @@ import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faTimes } from "@fortawesome/free-solid-svg-icons";
 import { useState } from "react";
 import axios from "axios";
+import { useHistory, useLocation } from "react-router-dom";
 
 const Signup = ({ setLoginModal, setSignupModal, server, setUser }) => {
   const [username, setUsername] = useState("");
@@ -9,6 +10,8 @@ const Signup = ({ setLoginModal, setSignupModal, server, setUser }) => {
   const [password, setPassword] = useState("");
   const [checkPassword, setCheckPassword] = useState("");
   const [errorMessage, setErrorMessage] = useState("");
+  const history = useHistory();
+  const location = useLocation();
 
   const handleSubmit = async (event) => {
     try {
@@ -34,7 +37,12 @@ const Signup = ({ setLoginModal, setSignupModal, server, setUser }) => {
       <div className="modal-wrapper">
         <div
           onClick={() => {
-            setSignupModal(false);
+            if (location.pathname.match("/favorites")) {
+              history.push("/");
+              setSignupModal(false);
+            } else {
+              setSignupModal(false);
+            }
           }}
         >
           <FontAwesomeIcon icon={faTimes} />

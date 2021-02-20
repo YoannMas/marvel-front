@@ -12,6 +12,11 @@ const Card = ({ el, server, setAdded, setLoginModal }) => {
   let location = useLocation();
   const notFound = "image_not_available";
 
+  const removeToFavorites = async () => {
+    try {
+    } catch (error) {}
+  };
+
   const addToFavorites = async () => {
     try {
       if (location.pathname === "/") {
@@ -90,7 +95,11 @@ const Card = ({ el, server, setAdded, setLoginModal }) => {
               icon={faHeart}
               onClick={() => {
                 if (Cookies.get("userToken")) {
-                  addToFavorites();
+                  if (location.patname.match("/favorites")) {
+                    removeToFavorites();
+                  } else {
+                    addToFavorites();
+                  }
                 } else {
                   setLoginModal(true);
                 }

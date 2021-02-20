@@ -1,6 +1,5 @@
 import { useParams } from "react-router-dom";
 import { useState, useEffect } from "react";
-import Cookies from "js-cookie";
 import Card from "../components/Card";
 import axios from "axios";
 
@@ -13,7 +12,7 @@ const Favorites = ({ server }) => {
   const fetchData = async () => {
     const response = await axios.get(`${server}/favorites/${token}`, {
       headers: {
-        authorization: `Bearer ${Cookies.get("userToken")}`,
+        authorization: `Bearer ${token}`,
       },
     });
     setData(response.data);
@@ -22,7 +21,7 @@ const Favorites = ({ server }) => {
 
   useEffect(() => {
     fetchData();
-  }, []);
+  }, [token]);
 
   return (
     <div className="container">
