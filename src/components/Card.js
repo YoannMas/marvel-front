@@ -5,16 +5,27 @@ import { useState } from "react";
 import Cookies from "js-cookie";
 import axios from "axios";
 
-const Card = ({ el, server, setAdded, setLoginModal }) => {
+const Card = ({ el, server, setAdded, setLoginModal, setRemove }) => {
   // state for description
   const [display, setDisplay] = useState(false);
   const [errorMessage, setErrorMessage] = useState("");
   let location = useLocation();
   const notFound = "image_not_available";
+  let type;
 
   const removeToFavorites = async () => {
     try {
-    } catch (error) {}
+      el.title ? (type = "comics") : (type = "characters");
+      const response = await axios.delete(`${server}/favorites/remove/${el._id}`, {
+        headers: {
+          authorization: `Bearer ${Cookies.get("userToken")}`,
+        },
+      });
+      console.log(response.data);
+      setRemove(el._id);
+    } catch (error) {
+      console.log(error.response.data.message);
+    }
   };
 
   const addToFavorites = async () => {
@@ -87,25 +98,21 @@ const Card = ({ el, server, setAdded, setLoginModal }) => {
           <span className="error" style={{ color: "#f0151cb7", fontWeight: 600 }}>
             {errorMessage}
           </span>
-          {location.pathname.match("/favorites") ? (
-            ""
-          ) : (
-            <FontAwesomeIcon
-              className="heart"
-              icon={faHeart}
-              onClick={() => {
-                if (Cookies.get("userToken")) {
-                  if (location.patname.match("/favorites")) {
-                    removeToFavorites();
-                  } else {
-                    addToFavorites();
-                  }
+          <FontAwesomeIcon
+            className="heart"
+            icon={faHeart}
+            onClick={() => {
+              if (Cookies.get("userToken")) {
+                if (location.pathname.match("/favorites")) {
+                  removeToFavorites();
                 } else {
-                  setLoginModal(true);
+                  addToFavorites();
                 }
-              }}
-            />
-          )}
+              } else {
+                setLoginModal(true);
+              }
+            }}
+          />
         </div>
       )}
     </div>

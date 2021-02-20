@@ -6,22 +6,27 @@ import axios from "axios";
 const Favorites = ({ server }) => {
   const [data, setData] = useState();
   const [isLoading, setIsLoading] = useState(true);
+  const [remove, setRemove] = useState("");
   const { token } = useParams();
   console.log(data);
 
   const fetchData = async () => {
-    const response = await axios.get(`${server}/favorites/${token}`, {
-      headers: {
-        authorization: `Bearer ${token}`,
-      },
-    });
-    setData(response.data);
-    setIsLoading(false);
+    try {
+      const response = await axios.get(`${server}/favorites/${token}`, {
+        headers: {
+          authorization: `Bearer ${token}`,
+        },
+      });
+      setData(response.data);
+      setIsLoading(false);
+    } catch (error) {
+      console.log(error.message);
+    }
   };
 
   useEffect(() => {
     fetchData();
-  }, [token]);
+  }, [token, remove]);
 
   return (
     <div className="container">
@@ -39,7 +44,7 @@ const Favorites = ({ server }) => {
               <h3>Favorites Characters</h3>
               <div className="overflow">
                 {data.favorites.characters.map((el) => {
-                  return <Card el={el} key={el._id} server={server} />;
+                  return <Card el={el} key={el._id} server={server} setRemove={setRemove} />;
                 })}
               </div>
             </div>
@@ -47,7 +52,7 @@ const Favorites = ({ server }) => {
               <h3>Favorites Comics</h3>
               <div className="overflow">
                 {data.favorites.comics.map((el) => {
-                  return <Card el={el} key={el._id} server={server} />;
+                  return <Card el={el} key={el._id} server={server} setRemove={setRemove} />;
                 })}
               </div>
             </div>
