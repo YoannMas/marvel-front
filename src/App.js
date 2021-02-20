@@ -19,6 +19,9 @@ function App() {
       console.log(token);
       Cookies.set("userToken", token, { expires: 7 });
       setUserToken(null);
+    } else {
+      Cookies.remove("userToken");
+      setUserToken(null);
     }
   };
 

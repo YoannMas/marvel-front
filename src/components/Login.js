@@ -3,9 +3,10 @@ import { faTimes } from "@fortawesome/free-solid-svg-icons";
 import { useState } from "react";
 import axios from "axios";
 
-const Login = ({ setLoginModal, server, setUser }) => {
+const Login = ({ setLoginModal, server, setUser, setSignupModal }) => {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
+  const [errorMessage, setErrorMessage] = useState("");
 
   const handleSubmit = async (event) => {
     try {
@@ -17,6 +18,7 @@ const Login = ({ setLoginModal, server, setUser }) => {
       setUser(response.data.token);
       setLoginModal(false);
     } catch (error) {
+      setErrorMessage("Email or password invalid");
       console.log(error.message);
     }
   };
@@ -44,14 +46,22 @@ const Login = ({ setLoginModal, server, setUser }) => {
           <input
             type="password"
             value={password}
-            placeholder="Enter your password"
+            placeholder="••••••••••••"
             onChange={(event) => {
               setPassword(event.target.value);
             }}
           />
           <button type="submit">Confirm</button>
         </form>
-        <button>No account yet ? Signup !</button>
+        <span style={{ color: "red", fontSize: 12, marginBottom: 10 }}>{errorMessage}</span>
+        <button
+          onClick={() => {
+            setLoginModal(false);
+            setSignupModal(true);
+          }}
+        >
+          No account yet ? Signup !
+        </button>
       </div>
     </div>
   );
