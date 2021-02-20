@@ -9,7 +9,7 @@
 
 .modal-wrapper {
   box-sizing: border-box;
-  background-color: #000;
+  background-color: $bcg;
   width: 350px;
   margin: 150px auto;
   display: flex;
@@ -42,7 +42,7 @@
       margin-bottom: 15px;
       border-radius: 6px;
       border: 1px solid $grey;
-      background-color: #000;
+      background-color: $bcg;
       padding: 5px 10px;
       outline: none;
       color: #fff;
@@ -72,7 +72,7 @@
   }
   button {
     width: 80%;
-    background-color: #000;
+    background-color: $bcg;
     border: none;
     outline: none;
     color: $grey;

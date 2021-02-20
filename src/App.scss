@@ -3,6 +3,7 @@
 $marvelColor: #f0151e;
 $marvelColorHovered: #d8151b;
 $grey: rgba(255, 255, 255, 0.336);
+$bcg: rgb(15, 15, 15);
 
 // IMPORTS
 @font-face {
@@ -17,7 +18,7 @@ $grey: rgba(255, 255, 255, 0.336);
 // GLOBAL RULES
 
 .App {
-  background-color: #000;
+  background-color: $bcg;
   font-family: "Montserrat", Arial, Helvetica, sans-serif;
   box-sizing: border-box;
 }

@@ -3,7 +3,7 @@ import Card from "../components/Card";
 import Pagination from "../components/Pagination";
 const axios = require("axios");
 
-const Characters = ({ server }) => {
+const Characters = ({ server, setAdded }) => {
   const [isLoading, setIsLoading] = useState(true);
   const [data, setData] = useState();
   const [name, setName] = useState("");
@@ -60,7 +60,7 @@ const Characters = ({ server }) => {
           <div className="wrapper" style={{ height: data.results.length < 5 && "100vh" }}>
             {data.results.length === 0 && <span style={{ color: "#fff" }}>No character found</span>}
             {data.results.map((el) => {
-              return <Card el={el} key={el._id} />;
+              return <Card el={el} key={el._id} server={server} setAdded={setAdded} />;
             })}
           </div>
           <Pagination page={page} setPage={setPage} data={data} limit={limit} />

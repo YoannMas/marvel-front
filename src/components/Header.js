@@ -3,8 +3,11 @@ import { Link } from "react-router-dom";
 import Login from "../components/Login";
 import Signup from "../components/Signup";
 import Cookies from "js-cookie";
+import { useEffect } from "react";
 
-const Header = ({ loginModal, setLoginModal, signupModal, setSignupModal, server, setUser }) => {
+const Header = ({ loginModal, setLoginModal, signupModal, setSignupModal, server, setUser, added }) => {
+  useEffect(() => {}, [added]);
+
   return (
     <div className="header">
       {loginModal && <Login setLoginModal={setLoginModal} setSignupModal={setSignupModal} server={server} setUser={setUser} />}
@@ -16,7 +19,7 @@ const Header = ({ loginModal, setLoginModal, signupModal, setSignupModal, server
           </Link>
           <Link to="/">Characters</Link>
           <Link to="/comics">Comics</Link>
-          <Link>Favorites</Link>
+          <Link className={added && "added"}>Favorites</Link>
         </div>
         <button
           onClick={() => {

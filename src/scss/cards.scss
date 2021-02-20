@@ -9,7 +9,7 @@
   display: flex;
   justify-content: space-between;
   align-items: center;
-  margin-top: 30px;
+  margin-top: 110px;
   h2 {
     color: #fff;
     font-size: 24px;
@@ -20,7 +20,7 @@
     margin: 0;
     height: 35px;
     width: 300px;
-    background-color: #000;
+    background-color: $bcg;
     border: 1px solid $grey;
     border-radius: 8px;
     padding: 10px;
@@ -48,7 +48,7 @@
     margin-right: 8px;
   }
   select {
-    background-color: #000;
+    background-color: $bcg;
     border: 1px solid $grey;
     color: $grey;
     border-radius: 5px;
@@ -126,13 +126,24 @@
   }
 }
 
+.heart {
+  position: absolute;
+  bottom: 20px;
+  right: 20px;
+  color: #f0151cb7;
+  font-size: 25px;
+  &:hover {
+    color: $marvelColorHovered;
+  }
+}
+
 .pagination {
   display: flex;
   justify-content: center;
   margin-bottom: 30px;
   button {
     box-sizing: border-box;
-    background-color: #000;
+    background-color: $bcg;
     border: none;
     font-size: 14px;
     color: $marvelColor;

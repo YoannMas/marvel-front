@@ -4,7 +4,7 @@ import Card from "../components/Card";
 import Pagination from "../components/Pagination";
 import axios from "axios";
 
-const Comics = ({ server }) => {
+const Comics = ({ server, setAdded }) => {
   const [data, setData] = useState();
   const [selector, setSelector] = useState("");
   const [title, setTitle] = useState("");
@@ -87,7 +87,7 @@ const Comics = ({ server }) => {
           <div className="wrapper" style={{ height: data[selector].length < 5 && "100vh" }}>
             {data[selector].length === 0 && <span style={{ color: "#fff" }}>No comics found</span>}
             {data[selector].map((el) => {
-              return <Card el={el} key={el._id} />;
+              return <Card el={el} key={el._id} server={server} setAdded={setAdded} />;
             })}
           </div>
           {!id && <Pagination page={page} setPage={setPage} data={data} limit={limit} />}

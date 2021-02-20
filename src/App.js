@@ -13,6 +13,7 @@ function App() {
   const [loginModal, setLoginModal] = useState(false);
   const [signupModal, setSignupModal] = useState(false);
   const [userToken, setUserToken] = useState(Cookies.get("userToken") || null);
+  const [added, setAdded] = useState(false);
 
   const setUser = (token) => {
     if (token) {
@@ -35,14 +36,15 @@ function App() {
           setSignupModal={setSignupModal}
           server={server}
           setUser={setUser}
+          added={added}
         />
         <Switch>
           {/* id - conditionnal params */}
           <Route path="/comics/:id?">
-            <Comics server={server} />
+            <Comics server={server} setAdded={setAdded} />
           </Route>
           <Route path="/">
-            <Characters server={server} />
+            <Characters server={server} setAdded={setAdded} />
           </Route>
         </Switch>
       </Router>
