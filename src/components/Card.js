@@ -8,6 +8,8 @@ import axios from "axios";
 const Card = ({ el, server, setAdded }) => {
   // state for description
   const [display, setDisplay] = useState(false);
+  const [errorMessage, setErrorMessage] = useState("");
+  const [fav, setFav] = useState(false);
   let location = useLocation();
   const notFound = "image_not_available";
 
@@ -48,6 +50,10 @@ const Card = ({ el, server, setAdded }) => {
       }, 350);
     } catch (error) {
       console.log(error.message);
+      if (error.response.data.message === "already in fav") {
+        setErrorMessage("Already added in favorite");
+        setDisplay(true);
+      }
     }
   };
 
@@ -69,6 +75,9 @@ const Card = ({ el, server, setAdded }) => {
         <div className="verso hidden">
           <span>{el.description ? el.description : "No description available for this character"}</span>
           {location.pathname === "/" && el.comics.length > 0 && <Link to={`/comics/${el._id}`}>See his comics</Link>}
+          <span className="error" style={{ color: "#f0151cb7", fontWeight: 600 }}>
+            {errorMessage}
+          </span>
           <FontAwesomeIcon className="heart" icon={faHeart} onClick={addToFavorites} />
         </div>
       )}

@@ -137,6 +137,14 @@
   }
 }
 
+.error {
+  position: absolute;
+  bottom: 5px;
+  left: 20px;
+  color: #f0151cb7;
+  font-size: 14px;
+}
+
 .pagination {
   display: flex;
   justify-content: center;
