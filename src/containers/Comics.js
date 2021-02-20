@@ -90,7 +90,7 @@ const Comics = ({ server }) => {
               return <Card el={el} key={el._id} />;
             })}
           </div>
-          <Pagination page={page} setPage={setPage} data={data} limit={limit} />
+          {!id && <Pagination page={page} setPage={setPage} data={data} limit={limit} />}
         </>
       )}
     </div>

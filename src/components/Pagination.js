@@ -2,7 +2,6 @@ import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faChevronLeft, faChevronRight } from "@fortawesome/free-solid-svg-icons";
 
 const Pagination = ({ page, setPage, data, limit }) => {
-  console.log(data.results.length);
   return (
     <div className="pagination">
       {page > 1 ? (
