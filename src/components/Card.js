@@ -5,9 +5,8 @@ import { useState } from "react";
 import Cookies from "js-cookie";
 import axios from "axios";
 
-const Card = ({ el, server, setAdded, setLoginModal, setRemove }) => {
+const Card = ({ el, server, setAdded, setLoginModal, setRemove, isActive, setIsActive }) => {
   // state for description
-  const [display, setDisplay] = useState(false);
   const [errorMessage, setErrorMessage] = useState("");
   let location = useLocation();
   const notFound = "image_not_available";
@@ -65,7 +64,6 @@ const Card = ({ el, server, setAdded, setLoginModal, setRemove }) => {
       console.log(error.message);
       if (error.response.data.message === "already in fav") {
         setErrorMessage("Already added in favorite");
-        setDisplay(true);
       }
     }
   };
@@ -77,18 +75,18 @@ const Card = ({ el, server, setAdded, setLoginModal, setRemove }) => {
     >
       <img
         onClick={() => {
-          setDisplay((display) => !display);
+          setIsActive(el._id);
         }}
         style={{ objectPosition: el.thumbnail.path.match(notFound) ? "left" : "top" }}
         src={`${el.thumbnail.path}.${el.thumbnail.extension}`}
         alt={el.name || el.title}
       />
       <div>{el.name ? el.name : el.title}</div>
-      {display && (
+      {isActive === el._id && (
         <div
           className="verso hidden"
           onClick={() => {
-            setDisplay((display) => !display);
+            setIsActive("");
           }}
         >
           <span>{el.description ? el.description : "No description available for this character"}</span>

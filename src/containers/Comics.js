@@ -4,17 +4,17 @@ import Card from "../components/Card";
 import Pagination from "../components/Pagination";
 import axios from "axios";
 
-const Comics = ({ server, setAdded, setLoginModal }) => {
+const Comics = ({ server, setAdded, setLoginModal, page, setPage }) => {
   const [data, setData] = useState();
   const [selector, setSelector] = useState("");
   const [title, setTitle] = useState("");
   const [isLoading, setIsLoading] = useState(true);
   const [onChange, setOnChange] = useState(false);
   const [limit, setLimit] = useState(100);
-  const [page, setPage] = useState(1);
+  const [isActive, setIsActive] = useState("");
   const { id } = useParams();
   const skip = (page - 1) * limit;
-  console.log(isLoading);
+  console.log(data);
 
   const handlePageChange = () => {
     window.scrollTo(0, 0);
@@ -87,7 +87,17 @@ const Comics = ({ server, setAdded, setLoginModal }) => {
           <div className="wrapper" style={{ height: data[selector].length < 5 && "100vh" }}>
             {data[selector].length === 0 && <span style={{ color: "#fff" }}>No comics found</span>}
             {data[selector].map((el) => {
-              return <Card el={el} key={el._id} server={server} setAdded={setAdded} setLoginModal={setLoginModal} />;
+              return (
+                <Card
+                  el={el}
+                  key={el._id}
+                  server={server}
+                  setAdded={setAdded}
+                  setLoginModal={setLoginModal}
+                  isActive={isActive}
+                  setIsActive={setIsActive}
+                />
+              );
             })}
           </div>
           {!id && <Pagination page={page} setPage={setPage} data={data} limit={limit} />}

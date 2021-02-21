@@ -3,13 +3,14 @@ import Card from "../components/Card";
 import Pagination from "../components/Pagination";
 const axios = require("axios");
 
-const Characters = ({ server, setAdded, setLoginModal }) => {
+const Characters = ({ server, setAdded, setLoginModal, page, setPage }) => {
   const [isLoading, setIsLoading] = useState(true);
   const [data, setData] = useState();
   const [name, setName] = useState("");
   const [limit, setLimit] = useState(100);
-  const [page, setPage] = useState(1);
-  const skip = (page - 1) * limit;
+  const [isActive, setIsActive] = useState("");
+  let skip = (page - 1) * limit;
+  console.log(data);
 
   const fetchData = async () => {
     try {
@@ -23,7 +24,7 @@ const Characters = ({ server, setAdded, setLoginModal }) => {
 
   useEffect(() => {
     fetchData();
-  }, [name, limit, page]);
+  }, [name, limit, page, skip]);
 
   return (
     <div className="container">
@@ -40,6 +41,7 @@ const Characters = ({ server, setAdded, setLoginModal }) => {
               value={name}
               placeholder="search your character..."
               onChange={(event) => {
+                setPage(1);
                 setName(event.target.value);
               }}
             />
@@ -60,7 +62,17 @@ const Characters = ({ server, setAdded, setLoginModal }) => {
           <div className="wrapper" style={{ height: data.results.length < 5 && "100vh" }}>
             {data.results.length === 0 && <span style={{ color: "#fff" }}>No character found</span>}
             {data.results.map((el) => {
-              return <Card el={el} key={el._id} server={server} setAdded={setAdded} setLoginModal={setLoginModal} />;
+              return (
+                <Card
+                  el={el}
+                  key={el._id}
+                  server={server}
+                  setAdded={setAdded}
+                  setLoginModal={setLoginModal}
+                  isActive={isActive}
+                  setIsActive={setIsActive}
+                />
+              );
             })}
           </div>
           <Pagination page={page} setPage={setPage} data={data} limit={limit} />

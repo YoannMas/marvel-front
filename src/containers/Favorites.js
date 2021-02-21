@@ -9,6 +9,7 @@ const Favorites = ({ server }) => {
   const [data, setData] = useState();
   const [isLoading, setIsLoading] = useState(true);
   const [remove, setRemove] = useState("");
+  const [isActive, setIsActive] = useState("");
   const { token } = useParams();
   console.log(data);
 
@@ -57,7 +58,9 @@ const Favorites = ({ server }) => {
                 {data.favorites.characters.length > 0 && <h3>Favorites Characters</h3>}
                 <div className="overflow">
                   {data.favorites.characters.map((el) => {
-                    return <Card el={el} key={el._id} server={server} setRemove={setRemove} />;
+                    return (
+                      <Card el={el} key={el._id} server={server} setRemove={setRemove} isActive={isActive} setIsActive={setIsActive} />
+                    );
                   })}
                 </div>
               </div>
@@ -65,7 +68,9 @@ const Favorites = ({ server }) => {
                 {data.favorites.comics.length > 0 && <h3>Favorites Comics</h3>}
                 <div className="overflow">
                   {data.favorites.comics.map((el) => {
-                    return <Card el={el} key={el._id} server={server} setRemove={setRemove} />;
+                    return (
+                      <Card el={el} key={el._id} server={server} setRemove={setRemove} isActive={isActive} setIsActive={setIsActive} />
+                    );
                   })}
                 </div>
               </div>

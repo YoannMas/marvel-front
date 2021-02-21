@@ -6,9 +6,13 @@ import Cookies from "js-cookie";
 import { useEffect } from "react";
 import { useHistory } from "react-router-dom";
 
-const Header = ({ loginModal, setLoginModal, signupModal, setSignupModal, server, setUser, added, userToken }) => {
+const Header = ({ loginModal, setLoginModal, signupModal, setSignupModal, server, setUser, added, userToken, setPage }) => {
   const history = useHistory();
   useEffect(() => {}, [added]);
+
+  const resetPage = () => {
+    setPage(1);
+  };
 
   return (
     <>
@@ -17,11 +21,15 @@ const Header = ({ loginModal, setLoginModal, signupModal, setSignupModal, server
       <div className="header">
         <div className="container">
           <div>
-            <Link to="/">
+            <Link to="/" onClick={resetPage}>
               <img src={logo} alt="Marvel's logo" />
             </Link>
-            <Link to="/">Characters</Link>
-            <Link to="/comics">Comics</Link>
+            <Link to="/" onClick={resetPage}>
+              Characters
+            </Link>
+            <Link to="/comics" onClick={resetPage}>
+              Comics
+            </Link>
             <Link
               to={`/favorites/${Cookies.get("userToken")}`}
               className={added ? "added" : undefined}
