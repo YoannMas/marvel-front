@@ -8,7 +8,7 @@ import Cookies from "js-cookie";
 import Favorites from "./containers/Favorites";
 
 // switch on local or prod
-const server = "https://marvel-node.herokuapp.com";
+const server = "http://localhost:3001";
 // https://marvel-node.herokuapp.com
 // http://localhost:3001
 

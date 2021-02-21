@@ -11,11 +11,9 @@ const Card = ({ el, server, setAdded, setLoginModal, setRemove }) => {
   const [errorMessage, setErrorMessage] = useState("");
   let location = useLocation();
   const notFound = "image_not_available";
-  let type;
 
   const removeToFavorites = async () => {
     try {
-      el.title ? (type = "comics") : (type = "characters");
       const response = await axios.delete(`${server}/favorites/remove/${el._id}`, {
         headers: {
           authorization: `Bearer ${Cookies.get("userToken")}`,
@@ -83,7 +81,7 @@ const Card = ({ el, server, setAdded, setLoginModal, setRemove }) => {
         }}
         style={{ objectPosition: el.thumbnail.path.match(notFound) ? "left" : "top" }}
         src={`${el.thumbnail.path}.${el.thumbnail.extension}`}
-        alt=""
+        alt={el.name || el.title}
       />
       <div>{el.name ? el.name : el.title}</div>
       {display && (
@@ -94,7 +92,9 @@ const Card = ({ el, server, setAdded, setLoginModal, setRemove }) => {
           }}
         >
           <span>{el.description ? el.description : "No description available for this character"}</span>
-          {location.pathname === "/" && el.comics.length > 0 && <Link to={`/comics/${el._id}`}>See his comics</Link>}
+          {(location.pathname === "/" || location.pathname.match("/favorites")) && (el.comics && el.comics.length) > 0 && (
+            <Link to={`/comics/${el._id}`}>See his comics</Link>
+          )}
           <span className="error" style={{ color: "#f0151cb7", fontWeight: 600 }}>
             {errorMessage}
           </span>

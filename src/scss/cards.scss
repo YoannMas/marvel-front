@@ -94,6 +94,8 @@
     flex-direction: column;
     justify-content: center;
     align-items: center;
+    overflow: hidden;
+    overflow-y: scroll;
     span {
       font-size: 14px;
       line-height: 16px;
