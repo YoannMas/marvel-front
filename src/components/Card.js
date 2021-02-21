@@ -11,6 +11,7 @@ const Card = ({ el, server, setAdded, setLoginModal, setRemove, isActive, setIsA
   let location = useLocation();
   const notFound = "image_not_available";
 
+  // Remove a favorite
   const removeToFavorites = async () => {
     try {
       const response = await axios.delete(`${server}/favorites/remove/${el._id}`, {
@@ -25,8 +26,10 @@ const Card = ({ el, server, setAdded, setLoginModal, setRemove, isActive, setIsA
     }
   };
 
+  // Add a favorite
   const addToFavorites = async () => {
     try {
+      // Add characters
       if (location.pathname === "/") {
         const response = await axios.post(
           `${server}/user/favorites`,
@@ -41,6 +44,7 @@ const Card = ({ el, server, setAdded, setLoginModal, setRemove, isActive, setIsA
           }
         );
         console.log(response.data);
+        // Add comics
       } else if (location.pathname.match("/comics")) {
         const response = await axios.post(
           `${server}/user/favorites`,
@@ -56,12 +60,14 @@ const Card = ({ el, server, setAdded, setLoginModal, setRemove, isActive, setIsA
         );
         console.log(response.data);
       }
+      // Favorites button animation
       setAdded(true);
       setTimeout(() => {
         setAdded(false);
       }, 350);
     } catch (error) {
       console.log(error.message);
+      // Error if the item target is already in fav list
       if (error.response.data.message === "already in fav") {
         setErrorMessage("Already added in favorite");
       }
@@ -69,14 +75,13 @@ const Card = ({ el, server, setAdded, setLoginModal, setRemove, isActive, setIsA
   };
 
   return (
-    <div
-      // display -verso- on click
-      className="card"
-    >
+    <div className="card">
       <img
+        // display -verso- on click
         onClick={() => {
           setIsActive(el._id);
         }}
+        // if item has picture display top, is it's the custom img not found display left in the purpose to show the text
         style={{ objectPosition: el.thumbnail.path.match(notFound) ? "left" : "top" }}
         src={`${el.thumbnail.path}.${el.thumbnail.extension}`}
         alt={el.name || el.title}
@@ -86,16 +91,20 @@ const Card = ({ el, server, setAdded, setLoginModal, setRemove, isActive, setIsA
         <div
           className="verso hidden"
           onClick={() => {
+            // Diplay none on second click
             setIsActive("");
           }}
         >
           <span>{el.description ? el.description : "No description available for this character"}</span>
+          {/* Display button "See his comics" if the item is a character and it has comics */}
           {(location.pathname === "/" || location.pathname.match("/favorites")) && (el.comics && el.comics.length) > 0 && (
             <Link to={`/comics/${el._id}`}>See his comics</Link>
           )}
+          {/* Display error message */}
           <span className="error" style={{ color: "#f0151cb7", fontWeight: 600 }}>
             {errorMessage}
           </span>
+          {/* Button for adding or removing an item in favorites */}
           <FontAwesomeIcon
             className="heart"
             icon={faHeart}

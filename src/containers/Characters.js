@@ -8,6 +8,7 @@ const Characters = ({ server, setAdded, setLoginModal, page, setPage }) => {
   const [data, setData] = useState();
   const [name, setName] = useState("");
   const [limit, setLimit] = useState(100);
+  // get the id of targeted element and display the verso of card
   const [isActive, setIsActive] = useState("");
   let skip = (page - 1) * limit;
   console.log(data);
@@ -41,6 +42,7 @@ const Characters = ({ server, setAdded, setLoginModal, page, setPage }) => {
               value={name}
               placeholder="search your character..."
               onChange={(event) => {
+                // Fix bug, and search on the whole list
                 setPage(1);
                 setName(event.target.value);
               }}
@@ -60,6 +62,7 @@ const Characters = ({ server, setAdded, setLoginModal, page, setPage }) => {
             </select>
           </div>
           <div className="wrapper" style={{ height: data.results.length < 5 && "100vh" }}>
+            {/* If no result display the following message */}
             {data.results.length === 0 && <span style={{ color: "#fff" }}>No character found</span>}
             {data.results.map((el) => {
               return (

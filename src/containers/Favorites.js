@@ -40,8 +40,10 @@ const Favorites = ({ server }) => {
       ) : (
         <div className="favorites">
           <h2>
+            {/* Display a custom message */}
             Welcome on your fav, <span style={{ color: "#f0151e" }}>{data.username}</span> !
           </h2>
+          {/* Display the following div if user has not favorites yet */}
           {data.favorites.characters.length === 0 && data.favorites.comics.length === 0 ? (
             <div style={{ display: "flex", flexDirection: "column", justifyContent: "center", alignItems: "center", height: "60vh" }}>
               <span style={{ color: "#fff", fontSize: 20, marginBottom: 20, fontWeight: 600 }}>No favorites found yet.</span>
@@ -53,6 +55,7 @@ const Favorites = ({ server }) => {
               </div>
             </div>
           ) : (
+            // If user has favorites
             <div className="favorites-wrapper">
               <div>
                 {data.favorites.characters.length > 0 && <h3>Favorites Characters</h3>}

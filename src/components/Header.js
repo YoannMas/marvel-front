@@ -10,12 +10,14 @@ const Header = ({ loginModal, setLoginModal, signupModal, setSignupModal, server
   const history = useHistory();
   useEffect(() => {}, [added]);
 
+  // Back to page 1 on click
   const resetPage = () => {
     setPage(1);
   };
 
   return (
     <>
+      {/* Display modal Login and Signup */}
       {loginModal && <Login setLoginModal={setLoginModal} setSignupModal={setSignupModal} server={server} setUser={setUser} />}
       {signupModal && <Signup setLoginModal={setLoginModal} setSignupModal={setSignupModal} server={server} setUser={setUser} />}
       <div className="header">
@@ -31,6 +33,8 @@ const Header = ({ loginModal, setLoginModal, signupModal, setSignupModal, server
               Comics
             </Link>
             <Link
+              // Animation on Favorites button when something added in fav
+              // If not logged, open modal
               to={`/favorites/${Cookies.get("userToken")}`}
               className={added ? "added" : undefined}
               onClick={() => {

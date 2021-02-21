@@ -16,6 +16,7 @@ const Comics = ({ server, setAdded, setLoginModal, page, setPage }) => {
   const skip = (page - 1) * limit;
   console.log(data);
 
+  // Compel the automatic scoll top on page changing
   const handlePageChange = () => {
     window.scrollTo(0, 0);
   };
@@ -26,6 +27,7 @@ const Comics = ({ server, setAdded, setLoginModal, page, setPage }) => {
       if (!onChange) {
         setIsLoading(true);
       }
+      // Define the right route in relation to the presence of comics ID
       if (id) {
         const response = await axios.get(`${server}/comics/${id}`);
         setData(response.data);
@@ -57,6 +59,7 @@ const Comics = ({ server, setAdded, setLoginModal, page, setPage }) => {
         <>
           <div className="title-search">
             <h2>{id ? `${data.name}'s comics` : "Marvel Comics List"}</h2>
+            {/* Search bar on comics/:id not available */}
             {!id && (
               <input
                 type="text"
@@ -69,6 +72,7 @@ const Comics = ({ server, setAdded, setLoginModal, page, setPage }) => {
               />
             )}
           </div>
+          {/* Limit on comics/:id not available */}
           {!id && (
             <div className="limit">
               <span>Number of comics per page:</span>
@@ -84,7 +88,9 @@ const Comics = ({ server, setAdded, setLoginModal, page, setPage }) => {
               </select>
             </div>
           )}
+          {/* Switch between comics and results - 2 differentes key in characters obj and comics obj */}
           <div className="wrapper" style={{ height: data[selector].length < 5 && "100vh" }}>
+            {/* Display the following message if no data return */}
             {data[selector].length === 0 && <span style={{ color: "#fff" }}>No comics found</span>}
             {data[selector].map((el) => {
               return (
