@@ -30,7 +30,7 @@ const Characters = ({ server, setAdded, setLoginModal, page, setPage }) => {
   return (
     <div className="container">
       {isLoading ? (
-        <div style={{ height: "100vh" }}>
+        <div style={{ color: "#fff", marginTop: 130 }}>
           <span>Loading...</span>
         </div>
       ) : (
