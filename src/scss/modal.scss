@@ -54,6 +54,22 @@
         color: #fff;
       }
     }
+    .password {
+      width: 254px;
+      position: relative;
+      svg {
+        position: absolute;
+        color: $grey;
+        top: 10px;
+        right: 10px;
+      }
+      &:focus {
+        input {
+          border-color: #fff;
+        }
+      }
+    }
+
     button {
       outline: none;
       margin: 15px;

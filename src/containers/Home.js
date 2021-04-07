@@ -10,7 +10,7 @@ const Home = () => {
         style={{
           width: "100%",
           left: "0",
-          top: "80px",
+          position: "fixed",
         }}
       >
         <source src={heroVideo} />

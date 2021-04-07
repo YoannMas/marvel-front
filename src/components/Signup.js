@@ -3,6 +3,7 @@ import { faTimes } from "@fortawesome/free-solid-svg-icons";
 import { useState } from "react";
 import axios from "axios";
 import { useHistory, useLocation } from "react-router-dom";
+import PasswordInput from "./PasswordInput";
 
 const Signup = ({ setLoginModal, setSignupModal, server, setUser }) => {
   const [username, setUsername] = useState("");
@@ -65,25 +66,16 @@ const Signup = ({ setLoginModal, setSignupModal, server, setUser }) => {
               setEmail(event.target.value);
             }}
           />
-          <input
-            type="password"
-            value={password}
-            placeholder="Enter your password"
-            onChange={(event) => {
-              setPassword(event.target.value);
-            }}
-          />
-          <input
-            type="password"
-            value={checkPassword}
-            placeholder="Confirm your password"
-            onChange={(event) => {
-              setCheckPassword(event.target.value);
-            }}
+          <PasswordInput password={password} setPassword={setPassword} />
+          <PasswordInput
+            password={checkPassword}
+            setPassword={setCheckPassword}
           />
           <button type="submit">Confirm</button>
         </form>
-        <span style={{ color: "red", fontSize: 12, marginBottom: 10 }}>{errorMessage}</span>
+        <span style={{ color: "red", fontSize: 12, marginBottom: 10 }}>
+          {errorMessage}
+        </span>
         <button
           onClick={() => {
             setSignupModal(false);

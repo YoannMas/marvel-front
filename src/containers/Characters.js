@@ -13,19 +13,20 @@ const Characters = ({ server, setAdded, setLoginModal, page, setPage }) => {
   let skip = (page - 1) * limit;
   console.log(data);
 
-  const fetchData = async () => {
-    try {
-      const response = await axios.get(`${server}/characters?name=${name}&limit=${limit}&skip=${skip}`);
-      setData(response.data);
-      setIsLoading(false);
-    } catch (error) {
-      console.log(error.message);
-    }
-  };
-
   useEffect(() => {
+    const fetchData = async () => {
+      try {
+        const response = await axios.get(
+          `${server}/characters?name=${name}&limit=${limit}&skip=${skip}`
+        );
+        setData(response.data);
+        setIsLoading(false);
+      } catch (error) {
+        console.log(error.message);
+      }
+    };
     fetchData();
-  }, [name, limit, page, skip]);
+  }, [name, limit, page, skip, server]);
 
   return (
     <div className="container">
@@ -61,9 +62,14 @@ const Characters = ({ server, setAdded, setLoginModal, page, setPage }) => {
               <option value="100">100</option>
             </select>
           </div>
-          <div className="wrapper" style={{ height: data.results.length < 5 && "100vh" }}>
+          <div
+            className="wrapper"
+            style={{ height: data.results.length < 5 && "100vh" }}
+          >
             {/* If no result display the following message */}
-            {data.results.length === 0 && <span style={{ color: "#fff" }}>No character found</span>}
+            {data.results.length === 0 && (
+              <span style={{ color: "#fff" }}>No character found</span>
+            )}
             {data.results.map((el) => {
               return (
                 <Card

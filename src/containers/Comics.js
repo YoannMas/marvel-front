@@ -14,42 +14,40 @@ const Comics = ({ server, setAdded, setLoginModal, page, setPage }) => {
   const [isActive, setIsActive] = useState("");
   const { id } = useParams();
   const skip = (page - 1) * limit;
-  console.log(data);
 
   // Compel the automatic scoll top on page changing
   const handlePageChange = () => {
     window.scrollTo(0, 0);
   };
 
-  const fetchData = async () => {
-    try {
-      // fix a bug with component goes from /comics/:id to /comics
-      if (!onChange) {
-        setIsLoading(true);
-      }
-      // Define the right route in relation to the presence of comics ID
-      if (id) {
-        const response = await axios.get(`${server}/comics/${id}`);
-        setData(response.data);
-        setSelector("comics");
-        setIsLoading(false);
-      } else {
-        const response = await axios.get(
-          `${server}/comics?title=${title}&limit=${limit}&skip=${skip}`
-        );
-        setData(response.data);
-        setSelector("results");
-        setIsLoading(false);
-      }
-    } catch (error) {
-      console.log(error.message);
-    }
-  };
-
   useEffect(() => {
+    const fetchData = async () => {
+      try {
+        // fix a bug with component goes from /comics/:id to /comics
+        if (!onChange) {
+          setIsLoading(true);
+        }
+        // Define the right route in relation to the presence of comics ID
+        if (id) {
+          const response = await axios.get(`${server}/comics/${id}`);
+          setData(response.data);
+          setSelector("comics");
+          setIsLoading(false);
+        } else {
+          const response = await axios.get(
+            `${server}/comics?title=${title}&limit=${limit}&skip=${skip}`
+          );
+          setData(response.data);
+          setSelector("results");
+          setIsLoading(false);
+        }
+      } catch (error) {
+        console.log(error.message);
+      }
+    };
     handlePageChange();
     fetchData();
-  }, [title, id, limit, skip]);
+  }, [title, id, limit, skip, server, onChange]);
 
   return (
     <div className="container">

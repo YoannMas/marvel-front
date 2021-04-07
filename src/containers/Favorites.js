@@ -11,25 +11,23 @@ const Favorites = ({ server }) => {
   const [remove, setRemove] = useState("");
   const [isActive, setIsActive] = useState("");
   const { token } = useParams();
-  console.log(data);
-
-  const fetchData = async () => {
-    try {
-      const response = await axios.get(`${server}/favorites/${token}`, {
-        headers: {
-          authorization: `Bearer ${token}`,
-        },
-      });
-      setData(response.data);
-      setIsLoading(false);
-    } catch (error) {
-      console.log(error.message);
-    }
-  };
 
   useEffect(() => {
+    const fetchData = async () => {
+      try {
+        const response = await axios.get(`${server}/favorites/${token}`, {
+          headers: {
+            authorization: `Bearer ${token}`,
+          },
+        });
+        setData(response.data);
+        setIsLoading(false);
+      } catch (error) {
+        console.log(error.message);
+      }
+    };
     fetchData();
-  }, [token, remove]);
+  }, [token, remove, server]);
 
   return (
     <div className="container">
