@@ -34,7 +34,9 @@ const Comics = ({ server, setAdded, setLoginModal, page, setPage }) => {
         setSelector("comics");
         setIsLoading(false);
       } else {
-        const response = await axios.get(`${server}/comics?title=${title}&limit=${limit}&skip=${skip}`);
+        const response = await axios.get(
+          `${server}/comics?title=${title}&limit=${limit}&skip=${skip}`
+        );
         setData(response.data);
         setSelector("results");
         setIsLoading(false);
@@ -89,9 +91,14 @@ const Comics = ({ server, setAdded, setLoginModal, page, setPage }) => {
             </div>
           )}
           {/* Switch between comics and results - 2 differentes key in characters obj and comics obj */}
-          <div className="wrapper" style={{ height: data[selector].length < 5 && "100vh" }}>
+          <div
+            className="wrapper"
+            style={{ height: data[selector].length < 5 && "100vh" }}
+          >
             {/* Display the following message if no data return */}
-            {data[selector].length === 0 && <span style={{ color: "#fff" }}>No comics found</span>}
+            {data[selector].length === 0 && (
+              <span style={{ color: "#fff" }}>No comics found</span>
+            )}
             {data[selector].map((el) => {
               return (
                 <Card
@@ -106,7 +113,14 @@ const Comics = ({ server, setAdded, setLoginModal, page, setPage }) => {
               );
             })}
           </div>
-          {!id && <Pagination page={page} setPage={setPage} data={data} limit={limit} />}
+          {!id && (
+            <Pagination
+              page={page}
+              setPage={setPage}
+              data={data}
+              limit={limit}
+            />
+          )}
         </>
       )}
     </div>

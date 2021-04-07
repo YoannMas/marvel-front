@@ -2,6 +2,7 @@ import "./App.scss";
 import Header from "./components/Header";
 import Characters from "./containers/Characters";
 import Comics from "./containers/Comics";
+import Home from "./containers/Home";
 import { BrowserRouter as Router, Switch, Route } from "react-router-dom";
 import { useState } from "react";
 import Cookies from "js-cookie";
@@ -47,13 +48,28 @@ function App() {
         <Switch>
           {/* id - conditionnal params */}
           <Route path="/comics/:id?">
-            <Comics server={server} setAdded={setAdded} setLoginModal={setLoginModal} page={page} setPage={setPage} />
+            <Comics
+              server={server}
+              setAdded={setAdded}
+              setLoginModal={setLoginModal}
+              page={page}
+              setPage={setPage}
+            />
           </Route>
           <Route path="/favorites/:token">
             <Favorites server={server} />
           </Route>
-          <Route path="/">
-            <Characters server={server} setAdded={setAdded} setLoginModal={setLoginModal} page={page} setPage={setPage} />
+          <Route path="/characters">
+            <Characters
+              server={server}
+              setAdded={setAdded}
+              setLoginModal={setLoginModal}
+              page={page}
+              setPage={setPage}
+            />
+          </Route>
+          <Route>
+            <Home />
           </Route>
         </Switch>
       </Router>

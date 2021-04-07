@@ -6,7 +6,17 @@ import Cookies from "js-cookie";
 import { useEffect } from "react";
 import { useHistory } from "react-router-dom";
 
-const Header = ({ loginModal, setLoginModal, signupModal, setSignupModal, server, setUser, added, userToken, setPage }) => {
+const Header = ({
+  loginModal,
+  setLoginModal,
+  signupModal,
+  setSignupModal,
+  server,
+  setUser,
+  added,
+  userToken,
+  setPage,
+}) => {
   const history = useHistory();
   useEffect(() => {}, [added]);
 
@@ -18,15 +28,29 @@ const Header = ({ loginModal, setLoginModal, signupModal, setSignupModal, server
   return (
     <>
       {/* Display modal Login and Signup */}
-      {loginModal && <Login setLoginModal={setLoginModal} setSignupModal={setSignupModal} server={server} setUser={setUser} />}
-      {signupModal && <Signup setLoginModal={setLoginModal} setSignupModal={setSignupModal} server={server} setUser={setUser} />}
+      {loginModal && (
+        <Login
+          setLoginModal={setLoginModal}
+          setSignupModal={setSignupModal}
+          server={server}
+          setUser={setUser}
+        />
+      )}
+      {signupModal && (
+        <Signup
+          setLoginModal={setLoginModal}
+          setSignupModal={setSignupModal}
+          server={server}
+          setUser={setUser}
+        />
+      )}
       <div className="header">
         <div className="container">
           <div>
             <Link to="/" onClick={resetPage}>
               <img src={logo} alt="Marvel's logo" />
             </Link>
-            <Link to="/" onClick={resetPage}>
+            <Link to="/characters" onClick={resetPage}>
               Characters
             </Link>
             <Link to="/comics" onClick={resetPage}>

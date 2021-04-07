@@ -5,7 +5,15 @@ import { useState } from "react";
 import Cookies from "js-cookie";
 import axios from "axios";
 
-const Card = ({ el, server, setAdded, setLoginModal, setRemove, isActive, setIsActive }) => {
+const Card = ({
+  el,
+  server,
+  setAdded,
+  setLoginModal,
+  setRemove,
+  isActive,
+  setIsActive,
+}) => {
   // state for description
   const [errorMessage, setErrorMessage] = useState("");
   let location = useLocation();
@@ -14,11 +22,14 @@ const Card = ({ el, server, setAdded, setLoginModal, setRemove, isActive, setIsA
   // Remove a favorite
   const removeToFavorites = async () => {
     try {
-      const response = await axios.delete(`${server}/favorites/remove/${el._id}`, {
-        headers: {
-          authorization: `Bearer ${Cookies.get("userToken")}`,
-        },
-      });
+      const response = await axios.delete(
+        `${server}/favorites/remove/${el._id}`,
+        {
+          headers: {
+            authorization: `Bearer ${Cookies.get("userToken")}`,
+          },
+        }
+      );
       console.log(response.data);
       setRemove(el._id);
     } catch (error) {
@@ -30,7 +41,7 @@ const Card = ({ el, server, setAdded, setLoginModal, setRemove, isActive, setIsA
   const addToFavorites = async () => {
     try {
       // Add characters
-      if (location.pathname === "/") {
+      if (location.pathname === "/characters") {
         const response = await axios.post(
           `${server}/user/favorites`,
           {
@@ -82,7 +93,9 @@ const Card = ({ el, server, setAdded, setLoginModal, setRemove, isActive, setIsA
           setIsActive(el._id);
         }}
         // if item has picture display top, is it's the custom img not found display left in the purpose to show the text
-        style={{ objectPosition: el.thumbnail.path.match(notFound) ? "left" : "top" }}
+        style={{
+          objectPosition: el.thumbnail.path.match(notFound) ? "left" : "top",
+        }}
         src={`${el.thumbnail.path}.${el.thumbnail.extension}`}
         alt={el.name || el.title}
       />
@@ -95,13 +108,22 @@ const Card = ({ el, server, setAdded, setLoginModal, setRemove, isActive, setIsA
             setIsActive("");
           }}
         >
-          <span>{el.description ? el.description : "No description available for this character"}</span>
+          <span>
+            {el.description
+              ? el.description
+              : "No description available for this character"}
+          </span>
           {/* Display button "See his comics" if the item is a character and it has comics */}
-          {(location.pathname === "/" || location.pathname.match("/favorites")) && (el.comics && el.comics.length) > 0 && (
-            <Link to={`/comics/${el._id}`}>See his comics</Link>
-          )}
+          {(location.pathname === "/characters" ||
+            location.pathname.match("/favorites")) &&
+            (el.comics && el.comics.length) > 0 && (
+              <Link to={`/comics/${el._id}`}>See his comics</Link>
+            )}
           {/* Display error message */}
-          <span className="error" style={{ color: "#f0151cb7", fontWeight: 600 }}>
+          <span
+            className="error"
+            style={{ color: "#f0151cb7", fontWeight: 600 }}
+          >
             {errorMessage}
           </span>
           {/* Button for adding or removing an item in favorites */}
