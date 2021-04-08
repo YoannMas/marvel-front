@@ -2,6 +2,7 @@ import { useState, useEffect } from "react";
 import { useParams } from "react-router-dom";
 import Card from "../components/Card";
 import Pagination from "../components/Pagination";
+import Loader from "../components/Loader";
 import axios from "axios";
 
 const Comics = ({ server, setAdded, setLoginModal, page, setPage }) => {
@@ -49,78 +50,68 @@ const Comics = ({ server, setAdded, setLoginModal, page, setPage }) => {
     fetchData();
   }, [title, id, limit, skip, server, onChange]);
 
-  return (
+  return isLoading ? (
+    <Loader />
+  ) : (
     <div className="container">
-      {isLoading ? (
-        <div style={{ height: "100vh" }}>
-          <span style={{ color: "#fff" }}>Loading...</span>
-        </div>
-      ) : (
-        <>
-          <div className="title-search">
-            <h2>{id ? `${data.name}'s comics` : "Marvel Comics List"}</h2>
-            {/* Search bar on comics/:id not available */}
-            {!id && (
-              <input
-                type="text"
-                value={title}
-                placeholder="search your comics..."
-                onChange={(event) => {
-                  setTitle(event.target.value);
-                  setOnChange(true);
-                }}
-              />
-            )}
-          </div>
-          {/* Limit on comics/:id not available */}
-          {!id && (
-            <div className="limit">
-              <span>Number of comics per page:</span>
-              <select
-                defaultValue="100"
-                onChange={(event) => {
-                  setLimit(event.target.value);
-                }}
-              >
-                <option value="25">25</option>
-                <option value="50">50</option>
-                <option value="100">100</option>
-              </select>
-            </div>
-          )}
-          {/* Switch between comics and results - 2 differentes key in characters obj and comics obj */}
-          <div
-            className="wrapper"
-            style={{ height: data[selector].length < 5 && "100vh" }}
+      <div className="title-search">
+        <h2>{id ? `${data.name}'s comics` : "Marvel Comics List"}</h2>
+        {/* Search bar on comics/:id not available */}
+        {!id && (
+          <input
+            type="text"
+            value={title}
+            placeholder="search your comics..."
+            onChange={(event) => {
+              setTitle(event.target.value);
+              setOnChange(true);
+            }}
+          />
+        )}
+      </div>
+      {/* Limit on comics/:id not available */}
+      {!id && (
+        <div className="limit">
+          <span>Number of comics per page:</span>
+          <select
+            defaultValue="100"
+            onChange={(event) => {
+              setLimit(event.target.value);
+            }}
           >
-            {/* Display the following message if no data return */}
-            {data[selector].length === 0 && (
-              <span style={{ color: "#fff" }}>No comics found</span>
-            )}
-            {data[selector].map((el) => {
-              return (
-                <Card
-                  el={el}
-                  key={el._id}
-                  server={server}
-                  setAdded={setAdded}
-                  setLoginModal={setLoginModal}
-                  isActive={isActive}
-                  setIsActive={setIsActive}
-                />
-              );
-            })}
-          </div>
-          {!id && (
-            <Pagination
-              page={page}
-              setPage={setPage}
-              data={data}
-              limit={limit}
-            />
-          )}
-        </>
+            <option value="25">25</option>
+            <option value="50">50</option>
+            <option value="100">100</option>
+          </select>
+        </div>
       )}
+      {/* Switch between comics and results - 2 differentes key in characters obj and comics obj */}
+      <div
+        className="wrapper"
+        style={{ height: data[selector].length < 5 && "100vh" }}
+      >
+        {/* Display the following message if no data return */}
+        {data[selector].length === 0 && (
+          <span style={{ color: "#fff" }}>No comics found</span>
+        )}
+        {data[selector].map((el) => {
+          return (
+            <Card
+              el={el}
+              key={el._id}
+              server={server}
+              setAdded={setAdded}
+              setLoginModal={setLoginModal}
+              isActive={isActive}
+              setIsActive={setIsActive}
+            />
+          );
+        })}
+      </div>
+      {!id && (
+        <Pagination page={page} setPage={setPage} data={data} limit={limit} />
+      )}
+      )
     </div>
   );
 };
