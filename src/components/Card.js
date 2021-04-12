@@ -99,7 +99,15 @@ const Card = ({
         src={`${el.thumbnail.path}.${el.thumbnail.extension}`}
         alt={el.name || el.title}
       />
-      <div>{el.name ? el.name : el.title}</div>
+      <div>
+        {el.name
+          ? el.name.length > 50
+            ? el.name.substring(0, 50) + "..."
+            : el.name
+          : el.title.length > 50
+          ? el.title.substring(0, 50) + "..."
+          : el.title}
+      </div>
       {isActive === el._id && (
         <div
           className="verso hidden"
@@ -110,8 +118,10 @@ const Card = ({
         >
           <span>
             {el.description
-              ? el.description
-              : "No description available for this character"}
+              ? el.description.length > 200
+                ? el.description.substring(0, 200) + "..."
+                : el.description
+              : "No description available"}
           </span>
           {/* Display button "See his comics" if the item is a character and it has comics */}
           {(location.pathname === "/characters" ||
