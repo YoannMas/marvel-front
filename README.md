@@ -1,28 +1,20 @@
 # Marvel - Frontend
 
-<div align="center">
 This project uses Marvel's API and render all characters and comics. The user can create an account and save his favorites characters and comics.
-
-<a href="https://marvel-yoann.netlify.app/">Netlify deploy</a>
-
-<a href="https://github.com/YoannMas/marvel-back.git">Backend repository</a>
-</div>
+<br />
+<a href="https://marvel-yoann.netlify.app/">Netlify deploy</a> - <a href="https://github.com/YoannMas/marvel-back.git">Backend repository</a>
 
 # Screenshot
 
 Find comic's character
 
-<div align="center">
-  <img src="./src/assets/marvel_3.gif">
-  <br/>
-  <br/>
+<img src="./src/assets/marvel_3.gif">
+<br/>
+<br/>
 
-  Search a comic and add it to favorite then remove it
+Search a comic and add it to favorite then remove it
 
-  <img src="./src/assets/marvel_2.gif">
-</div>
-
-
+<img src="./src/assets/marvel_2.gif">
 
 ## Dependencies
 
