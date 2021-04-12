@@ -12,7 +12,6 @@ This project uses Marvel's API and render all characters and comics. The user ca
 
 Find comic's character
 
-<img src="./src/assets/marvel_1.gif"/>
 <br/>
 <br/>
 
