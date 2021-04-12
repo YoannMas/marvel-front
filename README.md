@@ -4,7 +4,7 @@ This project uses Marvel's API and render all characters and comics. The user ca
 <br/>
 <a href="https://marvel-yoann.netlify.app/">Netlify deploy</a> - <a href="https://github.com/YoannMas/marvel-back.git">Backend repository</a>
 
-# Screenshot
+# Screenshots
 
 Find comic's character
 
