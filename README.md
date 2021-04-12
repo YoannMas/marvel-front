@@ -29,7 +29,7 @@ Search a comic and add it to favorite then remove it
 Clone this repository 
 
 ```
-git clone https://github.com/YoannMas/deliveroo-front-redux.git
+git clone https://github.com/YoannMas/marvel-front.git
 ```
 
 Install dependencies
